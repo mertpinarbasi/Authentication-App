@@ -1,9 +1,11 @@
 const express = require('express');
+/* global localStorage, */
+
 const app = express();
 const router = require('./routes/index');
 const authUser = require('./routes/authUser');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 9500;
 const mongoose = require('mongoose');
 
 const expressLayouts = require('express-ejs-layouts');

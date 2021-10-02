@@ -56,19 +56,23 @@ authUser.post('/login', async (req, res) => {
 	const userFound = await userModel.findOne({ email }).lean();
 
 	if (!userFound) {
-		return res.json({ status: 'error', error: 'User not found ! ' });
+		return res.render('not-found', { email });
+		// return res.json({ status: 'error', error: 'User not found ! ' });
 	}
 	if (await bcrypt.compare(password, userFound.password)) {
 		const { name, surname } = userFound;
 		const token = jwt.sign({ id: userFound._id, email: userFound.email }, JWT_SECRET);
-		res.render('success', { name, surname, email, token });
+		localStorage.setItem('token', 'mert');
+
+		res.render('success', { name, surname, email });
 	} else {
 		return res.json({ status: 'error', data: 'Your password is incorrect' });
 	}
 });
 
 authUser.post('/change-password', async (req, res) => {
-	const { token, newPassword } = req.body;
+	const { newPassword } = req.body;
+	const token = localStorage.getItem(token);
 
 	try {
 		const verified = jwt.verify(token, JWT_SECRET);
