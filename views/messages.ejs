@@ -1,0 +1,11 @@
+<% if(locals.errors){ %>
+    <% errors.forEach(function(error) { %>
+        <div class="ui yellow message">
+
+
+            <%= error.fail %>
+
+        </div>
+
+        <% }); %>
+            <% } %>
