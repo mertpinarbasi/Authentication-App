@@ -7,10 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
 </head>
-
+<style type="text/css">
+    body {
+        background-color: whitesmoke;
+    }
+</style>
 
 <body>
-    <h1 class="ui centered header">Welcome</h1>
+    <h1 class="ui centered header">Welcome <%= name %>
+    </h1>
     <div class="ui centered card">
 
         <div class="content">
@@ -26,9 +31,14 @@
             </div>
 
         </div>
-        <div class="ui fluid large submit button"><a href="/authUser/change-password">Forgot My Password</a>
+        <div class="ui fluid  large submit button"><a href="/authUser/change-password">Forgot My Password</a>
         </div>
     </div>
 </body>
+
+<script>
+    const token = '<%=token%>'
+    localStorage.setItem('token', token)
+</script>
 
 </html>

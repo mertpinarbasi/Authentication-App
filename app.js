@@ -5,7 +5,7 @@ const app = express();
 const router = require('./routes/index');
 const authUser = require('./routes/authUser');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8181;
 const mongoose = require('mongoose');
 
 const expressLayouts = require('express-ejs-layouts');
@@ -13,6 +13,7 @@ app.use(expressLayouts);
 app.set('view engine', 'ejs');
 // Body Parser
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.listen(PORT, () => {
 	console.log(`App is started at ${PORT} port`);
