@@ -7,7 +7,14 @@ const userSchema = new mongoose.Schema({
 	email: { type: mongoose.SchemaTypes.Email, required: true, unique: true },
 	password: { type: String, required: true },
 	isVerified: { type: Boolean, required: true },
-	emailToken: { type: String, required: true }
+	emailToken: {
+		type: {
+			token: String,
+			createdAt: Date,
+			expiresAt: Date
+		},
+		required: true
+	}
 });
 const userModel = mongoose.model('userSchema', userSchema);
 module.exports = userModel;

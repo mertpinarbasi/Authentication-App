@@ -5,7 +5,7 @@ const app = express();
 const router = require('./routes/index');
 const authUser = require('./routes/authUser');
 
-const PORT = process.env.PORT || 9500;
+const PORT = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 
 const expressLayouts = require('express-ejs-layouts');

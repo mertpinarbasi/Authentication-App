@@ -2,12 +2,14 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const authUser = express.Router();
 const userModel = require('../models/User');
+
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = require('../config/keys').JWT_SECRET;
 const crypto = require('crypto');
 
 // email verification
 const nodemailer = require('nodemailer');
+
 const transporter = nodemailer.createTransport({
 	service: 'hotmail',
 	auth: {
@@ -44,13 +46,18 @@ authUser.post('/register', async (req, res) => {
 		res.render('register', { errors, name, surname, email, password });
 	} else {
 		try {
+			const emailToken = {
+				token: crypto.randomBytes(4).toString('hex').toUpperCase(),
+				createdAt: Date.now(),
+				expiresAt: Date.now() + 8640000
+			};
 			const newUser = await userModel.create({
 				name: name,
 				surname: surname,
 				email: email,
 				password: cryptedPassword,
 				isVerified: false,
-				emailToken: crypto.randomBytes(4).toString('hex').toUpperCase()
+				emailToken: emailToken
 			});
 
 			// e-email verification
@@ -58,9 +65,9 @@ authUser.post('/register', async (req, res) => {
 				from: 'login-app-verify@outlook.com',
 				to: 'mpinarbasi35@gmail.com',
 				subject: 'Login-App Verification Code ',
-				html: `<h2>${newUser.name} ! Thanks for registering to login-app </h2>
+				html: `<h2>${newUser.name} ${newUser.surname} ! Thanks for registering to login-app. </h2>
 				<h3>Please verify your email to complete registration</h3> 
-				<h3> Your verification code is  : ${newUser.emailToken}</h3>`
+				<h3> Your verification code is  : ${newUser.emailToken.token}</h3>`
 			};
 
 			transporter.sendMail(emailOptions, (error, info) => {
@@ -87,12 +94,13 @@ authUser.get('/verification', async (req, res) => {
 });
 authUser.post('/verification', async (req, res) => {
 	try {
-		const { emailToken } = req.body;
-		console.log(emailToken);
-		const user = await userModel.findOne({ emailToken });
+		const { token } = req.body;
+		console.log(token);
+		const user = await userModel.findOne({ 'emailToken.token': token });
 		if (user) {
 			user.isVerified = true;
 			await user.save();
+
 			res.redirect('/authUser/login');
 		} else {
 			res.redirect('/authUser/register');
