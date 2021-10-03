@@ -1,16 +1,11 @@
 const bcrypt = require('bcryptjs');
-
 const crypto = require('crypto');
 
 const userModel = require('../../models/User');
-const nodemailer = require('nodemailer');
-const transporter = nodemailer.createTransport({
-	service: 'hotmail',
-	auth: {
-		user: 'login-app-verify@outlook.com',
-		pass: 'verifyMailer'
-	}
-});
+const process = require('process');
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 const postRegister = async (req, res) => {
 	const { name, surname, email, password } = req.body;
 
@@ -40,23 +35,23 @@ const postRegister = async (req, res) => {
 				emailToken: emailToken
 			});
 
-			// e-email verification
-			const emailOptions = {
+			const msg = {
 				from: 'login-app-verify@outlook.com',
 				to: 'mpinarbasi35@gmail.com',
 				subject: 'Login-App Verification Code ',
-				html: `<h2>${newUser.name} ${newUser.surname} ! Thanks for registering to login-app. </h2>
+				html: `<h2>Hi , ${newUser.name} ${newUser.surname} ! </h2>
+				<h2>Thanks for registering to login-app for ${newUser.email}. </h2>
 				<h3>Please verify your email to complete registration</h3> 
 				<h3> Your verification code is  : ${newUser.emailToken.token}</h3>`
 			};
-
-			transporter.sendMail(emailOptions, (error, info) => {
-				if (error) {
-					console.log(error);
-					return;
-				}
-				console.log('Sent : ' + info.response);
-			});
+			sgMail
+				.send(msg)
+				.then(() => {
+					console.log('Register Verification Email Sent');
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 
 			return res.redirect('/authUser/verification');
 		} catch (error) {
