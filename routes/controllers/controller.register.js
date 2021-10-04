@@ -2,13 +2,14 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
 const userModel = require('../../models/User');
-const process = require('process');
+
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const { SENDGRID_API_KEY } = require('../../config/keys');
+sgMail.setApiKey(SENDGRID_API_KEY);
 
 const postRegister = async (req, res) => {
 	const { name, surname, email, password } = req.body;
-
+	let isEmailInUse = false;
 	const cryptedPassword = await bcrypt.hash(password, 8);
 	let errors = [];
 	if (!name || !surname || !email || !password) {
@@ -58,7 +59,9 @@ const postRegister = async (req, res) => {
 			console.log(error);
 			if (error.code === 11000) {
 				//  duplication error
-				return res.json({ status: 'error', error: 'The given email is already in use ' });
+				isEmailInUse = true;
+				return res.render('register', { isEmailInUse });
+				// return res.json({ status: 'error', error: 'The given email is already in use ' });
 			} else {
 				return res.json(error);
 			}

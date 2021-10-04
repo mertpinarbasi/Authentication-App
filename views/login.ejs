@@ -42,27 +42,31 @@
                     Login
                 </div>
             </h2>
-            <form action="/authUser/login" method="POST" class="ui large form">
-                <div class="ui stacked segment">
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="at icon"></i>
-                            <input type="email" name="email" placeholder="Email" value="">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="lock icon"></i>
-                            <input type="password" name="password" placeholder="Password" value="">
-                        </div>
-                    </div>
-                    <button type="submit" class="ui fluid large violet submit button">Login</button>
+            <%- include("./messages/message.correct-login.ejs"); %>
+
+                <%- include("./messages/message.verify.ejs"); %>
+
+                    <form action="/authUser/login" method="POST" class="ui large form">
+                        <div class="ui stacked segment">
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="at icon"></i>
+                                    <input type="email" name="email" placeholder="Email" value="">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="lock icon"></i>
+                                    <input type="password" name="password" placeholder="Password" value="">
+                                </div>
+                            </div>
+                            <button type="submit" class="ui fluid large violet submit button">Login</button>
 
 
 
 
 
-            </form>
+                    </form>
 
 
         </div>

@@ -1,0 +1,15 @@
+<% if(locals.emailVerify===false){ %>
+    <div class="ui red message">
+        <p>
+            Please verify your account !
+        </p>
+    </div>
+    <div class="ui message">
+
+        <button class="ui  fluid button">
+            <i class="ui left key icon"></i>
+            <a href="/authUser/verification">Verify</a>
+        </button>
+
+    </div>
+    <% } %>

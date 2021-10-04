@@ -2,8 +2,9 @@ const userModel = require('../../models/User');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const sgMail = require('@sendgrid/mail');
-const process = require('process');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+const { SENDGRID_API_KEY } = require('../../config/keys');
+sgMail.setApiKey(SENDGRID_API_KEY);
 
 const postLostPassword = async (req, res) => {
 	const { email } = req.body;
@@ -32,24 +33,22 @@ const postLostPassword = async (req, res) => {
 			.catch((error) => {
 				console.error(error);
 			});
-
+		let message = null;
+		let isSend = true;
 		try {
-			// update the user
 			const hashedPassword = await bcrypt.hash(newPassword, 8);
 
 			userFound.password = hashedPassword;
-			try {
-				await userFound.save();
-			} catch (error) {
-				console.log(error);
-				res.json(error);
-			}
 
-			res.json({ status: 'ok' });
+			await userFound.save();
+			message = 'Your new password is sent to your email!';
 		} catch (error) {
-			console.log('hata');
-			res.json({ status: error });
+			const errorJSON = JSON.stringify(error);
+			message = errorJSON;
+			isSend = false;
 		}
+
+		res.render('lost-password', { message, isSend });
 	}
 };
 module.exports = postLostPassword;

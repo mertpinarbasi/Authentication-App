@@ -44,50 +44,51 @@
                     Register
                 </div>
             </h2>
-            <%- include("./messages/warning-Register.ejs"); %>
-                <form action="/authUser/register" method="POST" class="ui large form">
+            <%- include("./messages/message.warning-register.ejs"); %>
+                <%- include("./messages/message.email-in-use.ejs"); %>
+                    <form action="/authUser/register" method="POST" class="ui large form">
 
-                    <div class="ui stacked segment">
-                        <div class="field">
+                        <div class="ui stacked segment">
+                            <div class="field">
 
 
-                            <div class="ui left icon input">
-                                <i class="user icon"></i>
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
 
-                                <input type="text" name="name" placeholder="Name" value="">
+                                    <input type="text" name="name" placeholder="Name" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="field">
+                            <div class="field">
 
 
-                            <div class="ui left icon input">
-                                <i class="user icon"></i>
-                                <input type="text" name="surname" placeholder="Surname" value="">
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
+                                    <input type="text" name="surname" placeholder="Surname" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="field">
+                            <div class="field">
 
 
-                            <div class="ui left icon input">
-                                <i class="user icon"></i>
-                                <input type="email" name="email" placeholder="Email" value="">
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
+                                    <input type="email" name="email" placeholder="Email" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="field">
-                            <div class="ui left icon input">
-                                <i class="lock icon"></i>
-                                <input type="password" name="password" placeholder="Password" value="">
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="lock icon"></i>
+                                    <input type="password" name="password" placeholder="Password" value="">
+                                </div>
                             </div>
+                            <button type="submit" class="ui fluid large violet submit button">Register </button>
                         </div>
-                        <button type="submit" class="ui fluid large violet submit button">Register </button>
+
+
+
+                    </form>
+                    <div class="ui message">
+                        <p> Have An Account ? <a href="/authUser/login">Login</a></p>
                     </div>
-
-
-
-                </form>
-                <div class="ui message">
-                    <p> Have An Account ? <a href="/authUser/login">Login</a></p>
-                </div>
         </div>
     </div>
 
