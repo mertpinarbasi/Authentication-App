@@ -43,13 +43,23 @@
                 </div>
             </h2>
 
+            <div class="ui message center aligned ">
+                <h3>Total number of successful login attempts :
+                </h3>
+                <%=locals.loginInformation%>
+                    <h3>The average login time of latest day :
+                    </h3>
+                    <%= locals.loginInformation[1]%>
 
+            </div>
         </div>
+
+
+
+
+
     </div>
 
-
-
-    </div>
 
 </body>
 
