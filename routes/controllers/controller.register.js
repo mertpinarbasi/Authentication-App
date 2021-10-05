@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
-
+const moment = require('moment');
 const userModel = require('../../models/User');
 
 const sgMail = require('@sendgrid/mail');
@@ -22,10 +22,12 @@ const postRegister = async (req, res) => {
 		res.render('register', { errors, name, surname, email, password });
 	} else {
 		try {
+			const today = moment();
+			const tomorrow = moment(today).add(1, 'days');
 			const emailToken = {
 				token: crypto.randomBytes(4).toString('hex').toUpperCase(),
-				createdAt: Date.now(),
-				expiresAt: Date.now() + 8640000
+				createdAt: today,
+				expiresAt: tomorrow
 			};
 			const newUser = await userModel.create({
 				name: name,
