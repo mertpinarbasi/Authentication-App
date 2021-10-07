@@ -7,10 +7,16 @@ admin.get('/', (req, res) => {
 	res.render('../views/admin/admin');
 });
 admin.get('/newUserList', (req, res) => {
-	res.render('../views/admin/new-user-list', { newUsersList });
+	newUsersList().then((result) => {
+		const newUsersList = result;
+		res.render('../views/admin/new-user-list', { newUsersList });
+	});
 });
 admin.get('/unverifiedUsers', (req, res) => {
-	res.render('../views/admin/unverified-users', { unverifiedUsersResult });
+	unverifiedUsersResult().then((result) => {
+		const unverifiedUsersResult = result;
+		res.render('../views/admin/unverified-users', { unverifiedUsersResult });
+	});
 });
 admin.get('/loginProcessTime', (req, res) => {
 	loginInformationFunction().then((result) => {

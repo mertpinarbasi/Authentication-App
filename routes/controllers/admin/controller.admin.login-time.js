@@ -1,21 +1,13 @@
 const loginTimeSchema = require('../../../models/loginTime');
 const moment = require('moment');
-
 const yesterday = moment().subtract(1, 'days');
 
 // let oneDayAverageLogNumber = 0;
 
 const findLatestLogsAverage = async () => {
-	let allLogs = [];
 	let resultLogs = [];
 	let totalTime = 0;
-	allLogs = await loginTimeSchema.find({}, { _id: 0 });
-
-	allLogs.forEach((log) => {
-		if (log.loginDate > yesterday) {
-			resultLogs.push(log);
-		}
-	});
+	resultLogs = await loginTimeSchema.find({ loginDate: { $gte: yesterday } }, { _id: 0 });
 
 	resultLogs.forEach((log) => {
 		totalTime += log.loginTime;
