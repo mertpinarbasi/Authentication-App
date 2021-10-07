@@ -14,26 +14,41 @@
 </style>
 
 <body>
-    <h1 class="ui centered header">Welcome <%= name %>
-    </h1>
-    <div class="ui centered card">
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h1 class="ui centered header">Welcome <%= name %>
+            </h1>
+            <div class="ui centered card">
 
-        <div class="content">
-            <a class="header">
-                <%= name %>
-                    <%= surname %>
-            </a>
-            <div class="meta">
-                <span class="date">
-                    <%= email %>
+                <div class="content">
+                    <a class="header">
+                        <%= name %>
+                            <%= surname %>
+                    </a>
+                    <div class="meta">
+                        <span class="date">
+                            <%= email %>
 
-                </span>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="ui fluid   large submit button">
+
+                    <a href="/authUser/change-password">Change
+                        My Password</a>
+                </div>
+
+            </div>
+
+
+            <div class="ui  centered large submit button">
+                <i class="ui left sign out alternate icon"></i><a href="/">Sign Out</a>
             </div>
 
         </div>
-        <div class="ui fluid  large submit button"><a href="/authUser/change-password">Change My Password</a>
-        </div>
     </div>
+
 </body>
 
 <script>

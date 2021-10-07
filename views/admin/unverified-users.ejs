@@ -44,42 +44,52 @@
             </h2>
 
 
+            <div class="ui message center aligned ">
+                <% if(locals.unverifiedUsersResult){ %>
+                    <% locals.unverifiedUsersResult.forEach(function(user) { %>
+                        <div class="ui  centered  wide card">
+
+                            <div class="content">
+                                <a class="header">
+                                    <%= user.name %>
+                                        <%= user.surname %>
+                                </a>
+                                <div class="meta">
+                                    <span class="date">
+                                        <%= user.email %>
+                                    </span>
+                                </div>
+
+
+                                <div class="description">
+
+                                    <div class="ui divider"> Account created at :</div>
+                                    <%= user.emailToken.createdAt %>
+                                </div>
+                                <div class="ui divider"> Email expiration date:</div>
+
+                                <%= user.emailToken.expiresAt %>
+
+                            </div>
+
+                            <% }); %>
+                                <% } %>
+
+                        </div>
+
+            </div>
+
+
+            <div class="ui  centered large submit button">
+                <i class="ui left undo icon"></i><a href="/admin">Turn Back</a>
+            </div>
+
         </div>
     </div>
 
 
 
-
-    <% if(locals.unverifiedUsersResult){ %>
-        <% locals.unverifiedUsersResult.forEach(function(user) { %>
-            <div class="ui  centered  wide card">
-
-                <div class="content">
-                    <a class="header">
-                        <%= user.name %>
-                            <%= user.surname %>
-                    </a>
-                    <div class="meta">
-                        <span class="date">
-                            <%= user.email %>
-                        </span>
-                    </div>
-
-
-                    <div class="description">
-
-                        <div class="ui divider"> Account created at :</div>
-                        <%= user.emailToken.createdAt %>
-                    </div>
-                    <div class="ui divider"> Email expiration date:</div>
-
-                    <%= user.emailToken.expiresAt %>
-
-                </div>
-
-                <% }); %>
-                    <% } %>
-
 </body>
+
 
 </html>
