@@ -44,18 +44,37 @@
             </h2>
 
             <div class="ui message center aligned ">
-                <h3>Total number of successful login attempts :
+                <h3>Total number of successful login attempts : <%= `${locals.loginInformation.average} ms ` %>
                 </h3>
-                <%=locals.loginInformation%>
-                    <h3>The average login time of latest day :
-                    </h3>
-                    <%= locals.loginInformation[1]%>
+
+                <h3>The average login time of latest day :
+                    <%= `${locals.loginInformation.logNumber} ` %>
+                </h3>
+
+                <%locals.loginInformation.logs.forEach((log)=>{ %>
+                    <div class="ui  centered  wide card">
+
+                        <div class="content">
+                            <a class="header">
+                                <%= log.loginUser %>
+
+                            </a>
+                            <%=`${parseFloat(log.loginTime.toFixed(5)) } ms` %>
+                                <div class="meta">
+                                    <span class="date">
+                                        <%= log.loginDate%>
+                                    </span>
+                                </div>%>
+
+                        </div>
+                    </div>
+                    <% }) %>
+
 
             </div>
+
+
         </div>
-
-
-
 
 
     </div>

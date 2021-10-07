@@ -42,7 +42,8 @@ const postLogin = async (req, res) => {
 	const loginTime = (endTime - startTime) / 1000;
 
 	if (isLoginSuccess) {
-		loginTimeModel.create({ loginTime: loginTime, loginDate: moment() });
+		loginTimeModel.create({ loginUser: email, loginTime: loginTime, loginDate: moment() });
+		isLoginSuccess = false;
 	}
 };
 
