@@ -7,6 +7,7 @@ const userModel = require('../../models/User');
 const postChangePassword = async (req, res) => {
 	let isChanged = true;
 	const { token, newPassword } = req.body;
+	console.log(req.body);
 
 	try {
 		const verified = jwt.verify(token, JWT_SECRET);
