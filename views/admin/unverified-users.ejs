@@ -37,8 +37,8 @@
 
     <div class="ui large aligned center aligned grid">
         <div class="column">
-            <h2 class="ui violet image header">
-                <div class="content">
+            <h2 class="ui violet image header ">
+                <div class=" ui  content">
                     Unverified Users After 1 Day
                 </div>
             </h2>
@@ -46,7 +46,7 @@
 
             <div class="ui message center aligned ">
                 <% if(locals.unverifiedUsersResult){ %>
-                    <% locals.unverifiedUsersResult.forEach(function(user) { %>
+                    <% locals.unverifiedUsersResult.forEach((user)=> { %>
                         <div class="ui  centered  wide card">
 
                             <div class="content">
@@ -59,17 +59,18 @@
                                         <%= user.email %>
                                     </span>
                                 </div>
-
-
                                 <div class="description">
 
-                                    <div class="ui divider"> Account created at :</div>
+                                    <div class="ui divider"></div>
+                                    <h5> Account created at :</h5>
                                     <%= user.emailToken.createdAt %>
+
+
+                                        <div class="ui divider"></div>
+                                        <h5>Email expiration date:</h5>
+
+                                        <%= user.emailToken.expiresAt %>
                                 </div>
-                                <div class="ui divider"> Email expiration date:</div>
-
-                                <%= user.emailToken.expiresAt %>
-
                             </div>
 
                             <% }); %>
@@ -80,14 +81,15 @@
             </div>
 
 
-            <div class="ui  centered large submit button">
-                <i class="ui left undo icon"></i><a href="/admin">Turn Back</a>
-            </div>
+
 
         </div>
+
     </div>
 
-
+    <div class="ui  centered large submit button">
+        <i class="ui left undo icon"></i><a href="/admin">Turn Back</a>
+    </div>
 
 </body>
 

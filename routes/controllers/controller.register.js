@@ -40,7 +40,7 @@ const postRegister = async (req, res) => {
 
 			const msg = {
 				from: 'login-app-verify@outlook.com',
-				to: 'mpinarbasi35@gmail.com',
+				to: email,
 				subject: 'Login-App Verification Code ',
 				html: `<h2>Hi , ${newUser.name} ${newUser.surname} ! </h2>
 				<h2>Thanks for registering to login-app for ${newUser.email}. </h2>
