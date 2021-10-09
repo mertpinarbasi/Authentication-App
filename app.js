@@ -19,7 +19,7 @@ app.listen(PORT, () => {
 	console.log(`App is started at ${PORT} port`);
 });
 
-// mongoDB
+// mongoDB database connection
 const mongoDB = require('./config/keys').MONGO_URL;
 mongoose
 	.connect(mongoDB, {
@@ -28,9 +28,12 @@ mongoose
 	})
 	.then(() => console.log('mongoDB is ready'))
 	.catch((err) => console.log(err));
+
 // Routes
 
+// router is the main router for the home-page of the application
 app.use('/', router);
-
+// authUser router is used for authentication operations
 app.use('/authUser', authUser);
+// admin router is used for listing various log information from the database
 app.use('/admin', admin);

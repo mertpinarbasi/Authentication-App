@@ -42,27 +42,37 @@
                     Email Verification
                 </div>
             </h2>
-            <form action="/authUser/verification" method="POST" class="ui large form">
-                <div class="ui stacked segment">
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="lock icon"></i>
-                            <input type="text" name="token" placeholder="Verification" value="">
+            <% if(locals.isSuccess===false) {%>
+
+                <div class="ui red message">
+                    <p>
+                        <%= locals.errorMsg %>
+                    </p>
+                </div>
+                <% } %>
+
+                    <form action="/authUser/verification" method="POST" class="ui large form">
+                        <div class="ui stacked segment">
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="lock icon"></i>
+                                    <input type="text" name="token" placeholder="Verification" value="">
+
+                                </div>
+                            </div>
+                            <button type="submit" class="ui fluid positive button">Verify</button>
                         </div>
+
+
+                    </form>
+
+                    <div class="ui message">
+
+                        <div class="ui fluid large  submit button">
+                            <i class="ui left undo icon"></i><a href="/authUser/login">Turn Back</a>
+                        </div>
+
                     </div>
-                    <button type="submit" class="ui fluid positive button">Verify</button>
-                </div>
-
-
-            </form>
-
-            <div class="ui message">
-
-                <div class="ui fluid large  submit button">
-                    <i class="ui left undo icon"></i><a href="/authUser/login">Turn Back</a>
-                </div>
-
-            </div>
         </div>
     </div>
 

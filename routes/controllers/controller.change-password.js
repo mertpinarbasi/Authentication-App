@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = require('../../config/keys').JWT_SECRET;
 const userModel = require('../../models/User');
-
+// The token which is stored in the localStorage after the login operation will be taken by using request .
+// If JWT token is verified the user is able to change the account's password.
 const postChangePassword = async (req, res) => {
 	let isChanged = true;
 	let errorString = null;
