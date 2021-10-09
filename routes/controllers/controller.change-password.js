@@ -6,9 +6,13 @@ const userModel = require('../../models/User');
 
 const postChangePassword = async (req, res) => {
 	let isChanged = true;
+	let errorString = null;
 	const { token, newPassword } = req.body;
-	console.log(req.body);
+	if (newPassword.length < 5) {
+		isChanged = false;
 
+		errorString = 'The password must be longer than 5 characters.';
+	}
 	try {
 		const verified = jwt.verify(token, JWT_SECRET);
 		const _id = verified.id;
@@ -16,12 +20,10 @@ const postChangePassword = async (req, res) => {
 		await userModel.updateOne({ _id }, { $set: { password: hashedPassword } });
 	} catch (error) {
 		isChanged = false;
-
-		console.log(error);
+		errorString = JSON.stringify(error);
 	}
 
-	res.render('change-password', { isChanged });
-	console.log('wow');
+	res.render('change-password', { isChanged, errorString });
 };
 
 module.exports = postChangePassword;
