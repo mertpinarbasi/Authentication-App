@@ -5,6 +5,7 @@ const moment = require('moment');
 const postVerification = async (req, res) => {
 	let isSuccess = true;
 	let errorMsg = '';
+	let isExpired = false;
 	try {
 		const { token } = req.body;
 		console.log(req);
@@ -13,7 +14,8 @@ const postVerification = async (req, res) => {
 			if (moment() > user.emailToken.expiresAt) {
 				errorMsg = 'Your verification code is expired';
 				isSuccess = false;
-				res.render('verification', { isSuccess, errorMsg });
+				isExpired = true;
+				res.render('verification', { isSuccess, errorMsg, isExpired });
 			} else {
 				user.isVerified = true;
 				await user.save();

@@ -39,39 +39,36 @@
         <div class="column">
             <h2 class="ui violet image header">
                 <div class="content">
-                    Retrieve My Password
+                    Resend Verification Code
                 </div>
             </h2>
 
-            <form action="/authUser/lost-password" method="POST" class="ui large form">
+
+
+            <form action="/authUser/resend-verification" method="POST" class="ui large form">
                 <div class="ui stacked segment">
                     <div class="field">
                         <div class="ui left icon input">
-                            <i class="at icon"></i>
-                            <input type="email" name="email" placeholder="Email" value="">
+                            <i class="mail icon"></i>
+                            <input type="text" name="email" placeholder="Email" value="">
+
                         </div>
                     </div>
-
-                    <button type="submit" class="ui fluid large violet submit button">Retrieve</button>
-
-
-
+                    <button type="submit" class="ui fluid positive button">Resend Verification Code</button>
+                </div>
 
 
             </form>
 
-
-        </div>
-        <%- include("./messages/message.lost-password.ejs"); %>
             <div class="ui message">
-                <div class="ui  fluid button">
-                    <i class=" ui left undo icon"></i><a href="/">Turn Back</a>
+
+                <div class="ui fluid large  submit button">
+                    <i class="ui left undo icon"></i><a href="/authUser/login">Turn Back</a>
                 </div>
+
             </div>
+        </div>
     </div>
-
-    </div>
-
 
 </body>
 
