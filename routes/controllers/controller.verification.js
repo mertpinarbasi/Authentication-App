@@ -8,7 +8,7 @@ const postVerification = async (req, res) => {
 	let isExpired = false;
 	try {
 		const { token } = req.body;
-		console.log(req);
+
 		const user = await userModel.findOne({ 'emailToken.token': token });
 		if (user) {
 			if (moment() > user.emailToken.expiresAt) {
@@ -27,7 +27,7 @@ const postVerification = async (req, res) => {
 			return res.render('verification', { isSuccess, errorMsg });
 		}
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 	}
 };
 module.exports = postVerification;
