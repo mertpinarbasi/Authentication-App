@@ -15,7 +15,7 @@ in the Atlas cloud application that is provided by MongoDB
 itself. User schema and login schema for store login
 operations can be found in the code files.
 # Usage
-You can start the application by typing to the terminal "node app.js" or "nodemon app.js".
+You can start the application by typing "node app.js" or "nodemon app.js" to the terminal.
 # Npm Packages
 1. “bcryptjs” is used for hashing the users passwords to
 store in the database.
