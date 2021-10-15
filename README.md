@@ -14,7 +14,8 @@ no-SQL, is chosen to store information. The tables are created
 in the Atlas cloud application that is provided by MongoDB
 itself. User schema and login schema for store login
 operations can be found in the code files.
-
+# Usage
+You can start the application by typing "node app.js" .
 Npm Packages
 1. “bcryptjs” is used for hashing the users passwords to
 store in the database.
