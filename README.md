@@ -15,8 +15,8 @@ in the Atlas cloud application that is provided by MongoDB
 itself. User schema and login schema for store login
 operations can be found in the code files.
 # Usage
-You can start the application by typing "node app.js" .
-Npm Packages
+You can start the application by typing to the terminal "node app.js" or "nodemon app.js".
+# Npm Packages
 1. “bcryptjs” is used for hashing the users passwords to
 store in the database.
 2. “jsonwebtoken” is used for authorization of the users
@@ -37,6 +37,7 @@ uniqueness.
 Also, “eslint” and “nodemon” are added as developer
 dependencies.
 
+# Design Decisions
 
 In the registration form, all input boxes should be filled.
 Also, the password should not be shorter than 5 characters. If
@@ -59,6 +60,6 @@ user can change the password and the password should be
 longer than 5 characters again.
 Also, some statistics can be viewed by clicking the admin
 panel button on the home page.
- 
+ # Workflow Schema 
  ![loginAppWorkflow](https://user-images.githubusercontent.com/56068043/137516254-b6c1c259-8993-459d-9fe7-2c9a301aab49.png)
 
