@@ -50,6 +50,7 @@ When the login process is completed, a new token will be
 created and stored in the localStorage, which is an attribute of
 the window object in the browser, in order to authorize the
 user.
+
 After logging in, the user is able to change the account’s
 password. To complete this process, the JWT token must be
 taken by using localStorage.If the JWT token is verified, the
@@ -58,3 +59,5 @@ longer than 5 characters again.
 Also, some statistics can be viewed by clicking the admin
 panel button on the home page.
  
+ ![loginAppWorkflow](https://user-images.githubusercontent.com/56068043/137516254-b6c1c259-8993-459d-9fe7-2c9a301aab49.png)
+
