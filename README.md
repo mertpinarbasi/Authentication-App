@@ -61,5 +61,5 @@ longer than 5 characters again.
 Also, some statistics can be viewed by clicking the admin
 panel button on the home page.
  # Workflow Schema 
- ![loginAppWorkflow](https://user-images.githubusercontent.com/56068043/137516254-b6c1c259-8993-459d-9fe7-2c9a301aab49.png)
 
+![loginAppWorkflow](https://user-images.githubusercontent.com/56068043/137517397-eeaa6a75-3cdb-4376-bf5b-5c7377fae854.png)
