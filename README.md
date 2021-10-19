@@ -1,10 +1,10 @@
 # Authentication-App
-The main goal of this project is to implement a login
+The main goal of the project is to implement a login
 authentication feature for a website. Except for the basic
 operations like registering and log in, the users should retrieve
 verification emails after the registration process. In addition to
 that, changing the password option and sending a new
-verification code in case of expiration.
+verification code in case of expiration have been added as side operations.
 
 The login app is implemented by using node.js and
 express framework for the back-end and EJS templates are
