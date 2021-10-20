@@ -4,7 +4,7 @@ const path = require('path');
 require('dotenv').config({
   path: path.resolve('config.env'),
 });
-// api keys
+// api keys by using .env
 const config  = {
 	MONGO_URL : process.env.MONGO_URL,
 	JWT_SECRET : process.env.JWT_SECRET,
