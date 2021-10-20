@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+    <title>Login Page</title>
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+    <style type="text/css">
+        body {
+            background-color: #DADADA;
+        }
+
+        body>.grid {
+            height: 100%;
+        }
+
+        .image {
+            margin-top: -100px;
+        }
+
+        .column {
+            max-width: 450px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="ui violet image header">
+                <div class="content">
+                    Email Verification
+                </div>
+            </h2>
+            <% if(locals.resendVerificationMessage) {%>
+                <div class="ui green message">
+                    <p>
+                        <%= locals.resendVerificationMessage %>
+                    </p>
+                </div>
+                <% } %>
+                    <% if(locals.isSuccess===false) {%>
+
+                        <div class="ui red message">
+                            <p>
+                                <%= locals.errorMsg %>
+                            </p>
+                        </div>
+                        <% if(locals.isExpired===true) {%>
+                            <div class="ui message">
+
+                                <div class="ui fluid large  submit button">
+                                    <i class="ui left sync icon"></i>
+                                    <a href="/authUser/resend-verification">Send New Verification Code</a>
+                                </div>
+
+                            </div>
+                            <% } %>
+                                <% } %>
+
+
+                                    <form action="/authUser/verification" method="POST" class="ui large form">
+                                        <div class="ui stacked segment">
+                                            <div class="field">
+                                                <div class="ui left icon input">
+                                                    <i class="lock icon"></i>
+                                                    <input type="text" name="token" placeholder="Verification" value="">
+
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="ui fluid positive button">Verify</button>
+                                        </div>
+
+
+                                    </form>
+
+                                    <div class="ui message">
+
+                                        <div class="ui fluid large  submit button">
+                                            <i class="ui left undo icon"></i><a href="/authUser/login">Turn Back</a>
+                                        </div>
+
+                                    </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
