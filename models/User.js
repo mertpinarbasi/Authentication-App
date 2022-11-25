@@ -14,7 +14,8 @@ const userSchema = new mongoose.Schema({
 			expiresAt: Date
 		},
 		required: true
-	}
+	},
+	otpDisableTime: { type: Date, required: false },
 });
 const userModel = mongoose.model('userSchema', userSchema);
 module.exports = userModel;

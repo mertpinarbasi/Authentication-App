@@ -1,70 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main Page</title>
-</head>
-<style type="text/css">
+  </head>
+  <style type="text/css">
     body {
-        background-color: whitesmoke;
+      background-color: whitesmoke;
     }
-</style>
+  </style>
 
-<body>
+  <body>
     <div class="ui large aligned center aligned grid">
-        <div class="column">
-            <h1 class="ui centered header">Welcome <%= name %>
-            </h1>
-            <div class="ui centered card">
-
-                <div class="content">
-                    <a class="header">
-                        <%= name %>
-                            <%= surname %>
-                    </a>
-                    <div class="meta">
-                        <span class="date">
-                            <%= email %>
-
-                        </span>
-                    </div>
-
-                </div>
-                <div class="ui fluid   large submit button">
-
-                    <a href="/authUser/change-password">Change
-                        My Password</a>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
+      <div class="column">
+        <h1 class="ui centered header">Welcome <%= name %></h1>
+        <div class="ui centered card">
+          <div class="content">
+            <a class="header"> <%= name %> <%= surname %> </a>
+            <div class="meta">
+              <span class="date"> <%= email %> </span>
             </div>
-            <div class="ui centered card">
-                <div class="ui large submit button">
+          </div>
+          <div class="ui fluid large submit button">
+            <a href="/authUser/change-password">Change My Password</a>
+          </div>
 
-                    <a href="/authUser/login">Sign Out </a>
+          <div class="ui fluid large submit button">
+            <form
+              method="POST"
+              action="/authUser/disable-otp"
+              id="form"
+              class="ui large form"
+            >
+              <div class="ui stacked segment">
+                <div class="field">
+                  <div class="ui left icon input">
+                    <i class="clock icon"></i>
+                    <input
+                      id="disableOtpTime"
+                      type="number"
+                      name="otpDisableTime"
+                      placeholder="Time"
+                      value=""
+                    />
+                    <input
+                      type="text"
+                      name="email"
+                      hidden
+                    value= <%= email %>
+                    />
+                  </div>
                 </div>
-            </div>
+
+                <button
+                  type="submit"
+                  class="ui fluid large violet submit button"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+        <div class="ui centered card">
+          <div class="ui large submit button">
+            <a href="/authUser/login">Sign Out </a>
+          </div>
+        </div>
+      </div>
     </div>
+  </body>
 
-
-</body>
-
-<script>
-    const token = '<%=token%>'
-    localStorage.setItem('token', token)
-</script>
-
+  <script>
+    const token = "<%=token%>";
+    localStorage.setItem("token", token);
+  </script>
 </html>

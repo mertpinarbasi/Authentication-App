@@ -2,9 +2,8 @@ const Otp = require('../../models/otpModel');
 const bcrypt = require("bcryptjs");
 
 const verifyOtp = async (req, res) => {
-    const name = req.body.name;
-    const surname = req.body.surname;
-    const email = req.body.email;
+    const { name, surname, email, token } = req.body;
+
 
 
     const otpHolder = await Otp.find({
@@ -18,7 +17,7 @@ const verifyOtp = async (req, res) => {
     if (rightOtpFind.email === req.body.email && validUser) {
         const OTPdelete = await Otp.deleteMany({ email: rightOtpFind.email })
 
-        res.render('success', { name, surname, email })
+        res.render('success', { name, surname, email, token })
         // return res.status(200).send({ name: name, surname: surname, email: email, message: "User is verified!" })
     }
     else {

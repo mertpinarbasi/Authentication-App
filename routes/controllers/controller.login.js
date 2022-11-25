@@ -28,7 +28,7 @@ const postLogin = async (req, res) => {
 	}
 	// encrypted password is going to be compared with the given password value
 	if (await bcrypt.compare(password, userFound.password)) {
-		const { name, surname, isVerified, email } = userFound;
+		const { name, surname, isVerified, email, otpDisableTime } = userFound;
 		// if user is not verified the account via email code , verification page will be rendered
 		// if (!isVerified) {
 		// 	const emailVerify = false;
@@ -51,8 +51,13 @@ const postLogin = async (req, res) => {
 		otp.otp = await bcrypt.hash(otp.otp, salt);
 		const result = await otp.save();
 
+		if (otpDisableTime && otpDisableTime > Date.now())
+			res.render('success', { name, surname, email, token })
+		else {
+			console.log(otpDisableTime > Date.now(), otpDisableTime, moment().toDate())
+			res.render('otp-verification', { name, surname, email, token })
+		}
 
-		res.render('otp-verification', { name, surname, email })
 		isLoginSuccess = true;
 	} else {
 		isPasswordCorrect = false;
