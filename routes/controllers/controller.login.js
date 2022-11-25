@@ -5,6 +5,9 @@ const userModel = require('../../models/User');
 const loginTimeModel = require('../../models/loginTime');
 const moment = require('moment');
 const { performance } = require('perf_hooks');
+const { Otp } = require('../../models/otpModel')
+const otpGenerator = require("otp-generator");
+const otpModel = require('../../models/otpModel');
 
 // for time calculation
 let startTime = null;
@@ -25,17 +28,31 @@ const postLogin = async (req, res) => {
 	}
 	// encrypted password is going to be compared with the given password value
 	if (await bcrypt.compare(password, userFound.password)) {
-		const { name, surname, isVerified } = userFound;
+		const { name, surname, isVerified, email } = userFound;
 		// if user is not verified the account via email code , verification page will be rendered
-		if (!isVerified) {
-			const emailVerify = false;
-			return res.render('login', { emailVerify });
-		}
+		// if (!isVerified) {
+		// 	const emailVerify = false;
+		// 	return res.render('login', { emailVerify });
+		// }
+
+
+
 		// JWT token will be created in case of login process is completed.
 		// Hence , the user is authorized for specific operations.
 		const token = jwt.sign({ id: userFound._id, email: userFound.email }, JWT_SECRET);
 
-		res.render('success', { name, surname, email, token });
+		// res.render('success', { name, surname, email, token });
+
+		const OTP = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false, });
+		console.log("otp key", OTP)
+
+		const otp = await otpModel.create({ email: email, otp: OTP })
+		const salt = await bcrypt.genSalt(10)
+		otp.otp = await bcrypt.hash(otp.otp, salt);
+		const result = await otp.save();
+
+
+		res.render('otp-verification', { name, surname, email })
 		isLoginSuccess = true;
 	} else {
 		isPasswordCorrect = false;
@@ -51,4 +68,6 @@ const postLogin = async (req, res) => {
 	}
 };
 
+
 module.exports = postLogin;
+

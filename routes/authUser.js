@@ -7,6 +7,8 @@ const postVerification = require('./controllers/controller.verification');
 const postChangePassword = require('./controllers/controller.change-password');
 const postLostPassword = require('./controllers/controller.lost-password');
 const postResendVerification = require('./controllers/controller.resend-verification');
+const verifyOtp = require("./controllers/controller.verify-otp")
+
 authUser.get('/login', (req, res) => {
 	res.render('login');
 });
@@ -27,6 +29,9 @@ authUser.get('/verification', (req, res) => {
 authUser.get('/resend-verification', (req, res) => {
 	res.render('resend-verification');
 });
+authUser.get('/otp-verification', (req, res) => {
+	res.render('otp-verification')
+})
 
 authUser.post('/register', postRegister);
 authUser.post('/login', postLogin);
@@ -34,4 +39,5 @@ authUser.post('/verification', postVerification);
 authUser.post('/change-password', postChangePassword);
 authUser.post('/lost-password', postLostPassword);
 authUser.post('/resend-verification', postResendVerification);
+authUser.post('/otp-verification', verifyOtp);
 module.exports = authUser;
