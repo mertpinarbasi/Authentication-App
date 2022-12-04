@@ -8,7 +8,7 @@ const { performance } = require('perf_hooks');
 const { Otp } = require('../../models/otpModel')
 const otpGenerator = require("otp-generator");
 const otpModel = require('../../models/otpModel');
-
+const hotp = require('hotp')
 // for time calculation
 let startTime = null;
 let endTime = null;
@@ -43,7 +43,10 @@ const postLogin = async (req, res) => {
 
 		// res.render('success', { name, surname, email, token });
 
-		const OTP = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false, });
+
+		var key = 'my hotp key'
+		var counter = 0
+		const OTP = hotp(key, counter, { digits: 8 })
 		console.log("otp key", OTP)
 
 		const otp = await otpModel.create({ email: email, otp: OTP })
