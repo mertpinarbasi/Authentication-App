@@ -12,6 +12,8 @@ const hotp = require('hotp')
 // for time calculation
 let startTime = null;
 let endTime = null;
+var counter = 0
+var key = '123abc'
 
 // login flags for decide which message should be displayed
 let isPasswordCorrect = true;
@@ -44,15 +46,24 @@ const postLogin = async (req, res) => {
 		// res.render('success', { name, surname, email, token });
 
 
-		var key = 'my hotp key'
-		var counter = 0
-		const OTP = hotp(key, counter, { digits: 8 })
+
+		const OTP = hotp(key, counter, { digits: 6 })
+		counter++;
 		console.log("otp key", OTP)
 
-		const otp = await otpModel.create({ email: email, otp: OTP })
-		const salt = await bcrypt.genSalt(10)
-		otp.otp = await bcrypt.hash(otp.otp, salt);
-		const result = await otp.save();
+
+
+		try {
+			const otp = await otpModel.create({ email: email, otp: OTP })
+			const salt = await bcrypt.genSalt(5)
+			otp.otp = await bcrypt.hash(otp.otp, salt);
+			const result = await otp.save();
+			console.log("", otp.otp)
+
+		}
+		catch (err) {
+			console.log(err);
+		}
 
 		if (otpDisableTime && otpDisableTime > Date.now())
 			res.render('success', { name, surname, email, token })
